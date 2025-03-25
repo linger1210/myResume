@@ -47,6 +47,7 @@
       text-decoration: none;
       border-radius: 5px;
       transition: background-color 0.3s ease;
+      cursor: pointer;
     }
     .download-btn:hover {
       background-color: #34495e;
@@ -408,8 +409,8 @@
     // Callback function called when Cloudflare Turnstile is successfully completed
     function onTurnstileSuccess(token) {
       document.getElementById('turnstileModal').style.display = 'none';
-      // Trigger the download of the resume
-      window.location.href = "Resume - Lee Lin Yuan 0325.pdf";
+      // Open the resume in a new tab
+      window.open("Resume - Lee Lin Yuan 0325.pdf", "_blank");
     }
     // Optionally, close the modal when clicking outside of it
     window.onclick = function(event) {
