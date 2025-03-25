@@ -1,0 +1,7 @@
+tunnel: 534041f5-2b65-41e4-bd9e-762d9299f431
+credentials-file: /path/to/.cloudflared/534041f5-2b65-41e4-bd9e-762d9299f431.json
+
+ingress:
+  - hostname: leelinyuan.com
+    service: http://localhost:8000
+  - service: http_status:404
