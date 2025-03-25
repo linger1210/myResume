@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Resume - Senior Solutions Engineer</title>
@@ -148,6 +149,33 @@
       padding: 0;
       list-style: disc inside;
     }
+    /* Contact Form Styling */
+    .contact-form {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: #f9f9f9;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .contact-form button {
+      padding: 10px 20px;
+      background-color: #2c3e50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .contact-form button:hover {
+      background-color: #34495e;
+    }
     /* Force the print layout to match screen layout exactly */
     @media print {
       body {
@@ -180,6 +208,7 @@
       <h1>Lee Lin Yuan</h1>
       <p>Senior Presales Solution Consultant (Fintech) | Senior Post-sales Solutions Engineer (Telco)</p>
       <!-- Download Button -->
+       
       <a href="Resume - Lee Lin Yuan 0325.pdf" download class="download-btn">Download Resume</a>
     </div>
     <!-- Main Content: Left & Right Columns -->
@@ -302,14 +331,26 @@
           <h2>Awards &amp; Recognitions</h2>
           <ul>
             <li><strong>ERP "Heroic Crossing" Medal:</strong> Top 5% ERP performers, awarded by CEO Ren Zhengfei.</li>
-            <li><strong>Global Meticulous Transition Award:</strong> Best ERP consultancy & seamless execution by HQ PE.</li>
+            <li><strong>Global Meticulous Transition Award:</strong> Best ERP consultancy &amp; seamless execution by HQ PE.</li>
             <li><strong>Quality Star Award:</strong> Top 1% of employees.</li>
             <li><strong>Tomorrow's Star Award:</strong> Top 10% emerging leaders.</li>
             <li><strong>Regional IT Digital Capability Award:</strong> Excellence in digital innovation.</li>
             <li><strong>Outstanding Contribution Award:</strong> 1% across Asia Pacific.</li>
             <li><strong>Excellent New Employees Award:</strong> &lt;5% new hires.</li>
-            <li><strong>Excellent Knowledge Operation Award:</strong> Knowledge sharing & timely execution.</li>
+            <li><strong>Excellent Knowledge Operation Award:</strong> Knowledge sharing &amp; timely execution.</li>
           </ul>
+        </div>
+        <!-- Contact Form with Turnstile -->
+        <div class="section contact-form">
+          <h2>Contact Me</h2>
+          <form action="/submit" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <!-- Cloudflare Turnstile Widget -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAABCZBfcM_f4sGgGQ"></div>
+            <button type="submit">Send Message</button>
+          </form>
         </div>
       </div>
     </div>
