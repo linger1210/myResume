@@ -239,7 +239,7 @@
       <h1>Lee Lin Yuan</h1>
       <p>Senior Presales Solution Consultant (Fintech) | Senior Post-sales Solutions Engineer (Telco)</p>
       <!-- Download Button -->
-      <a href="Resume - Lee Lin Yuan 0325.pdf" download class="download-btn" id="downloadResume">Download Resume</a>
+      <a href="Resume - Lee Lin Yuan 0325.pdf" download class="download-btn" id="downloadBtn">Download Resume</a>
     </div>
     <!-- Main Content: Left & Right Columns -->
     <div class="main-content">
@@ -367,26 +367,26 @@
           </ul>
         </div>
         <!-- Contact Form: Only Message Input -->
-<div class="section contact-form">
-  <h2>Contact Me</h2>
-  <form id="contactForm">
-    <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-</div>
-
-<script>
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var message = this.message.value;
-    var subject = encodeURIComponent("Contact via Website");
-    var body = encodeURIComponent(message);
-    // This opens the default email client to send the email.
-    window.location.href = "mailto:linger97.ll@gmail.com?subject=" + subject + "&body=" + body;
-  });
-</script>
-
-  
+        <div class="section contact-form">
+          <h2>Contact Me</h2>
+          <form id="contactForm">
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+        <script>
+          document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var message = this.message.value;
+            var subject = encodeURIComponent("Contact via Website");
+            var body = encodeURIComponent(message);
+            // Open the default email client to send the email.
+            window.location.href = "mailto:linger97.ll@gmail.com?subject=" + subject + "&body=" + body;
+          });
+        </script>
+      </div>
+    </div>
+  </div>
   <!-- Modal for Turnstile Verification -->
   <div id="turnstileModal" class="modal">
     <div class="modal-content">
@@ -395,34 +395,29 @@
       <div class="cf-turnstile" data-sitekey="0x4AAAAAABCZBfcM_f4sGgGQ" data-callback="onTurnstileSuccess"></div>
     </div>
   </div>
-  
   <script>
-    // When the download button is clicked, show the turnstile modal
-    document.getElementById('downloadResume').addEventListener('click', function(e) {
+    // When the download button is clicked, show the Turnstile modal
+    document.getElementById('downloadBtn').addEventListener('click', function(e) {
       e.preventDefault();
       document.getElementById('turnstileModal').style.display = 'block';
     });
-    
-    // Close modal if user clicks on the close button
+    // Close modal if user clicks the close button
     document.getElementById('closeModal').addEventListener('click', function() {
       document.getElementById('turnstileModal').style.display = 'none';
     });
-    
     // Callback function called when Cloudflare Turnstile is successfully completed
     function onTurnstileSuccess(token) {
-      // Optionally, you can validate the token on your server before proceeding
       document.getElementById('turnstileModal').style.display = 'none';
       // Trigger the download of the resume
       window.location.href = "Resume - Lee Lin Yuan 0325.pdf";
     }
-    
     // Optionally, close the modal when clicking outside of it
     window.onclick = function(event) {
       const modal = document.getElementById('turnstileModal');
       if (event.target == modal) {
         modal.style.display = "none";
       }
-    }
+    };
   </script>
 </body>
 </html>
