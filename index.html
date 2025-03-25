@@ -134,7 +134,7 @@
     .experience-block li {
       margin-bottom: 3px;
     }
-    /* Awards & Recognitions: Multi-column for space saving */
+    /* Awards & Recognitions */
     .awards ul {
       columns: 2;
       column-gap: 20px;
@@ -176,7 +176,38 @@
     .contact-form button:hover {
       background-color: #34495e;
     }
-    /* Force the print layout to match screen layout exactly */
+    /* Modal Styling for Turnstile */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 100; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: black;
+    }
+    /* Print Layout */
     @media print {
       body {
         margin: 0;
@@ -208,8 +239,7 @@
       <h1>Lee Lin Yuan</h1>
       <p>Senior Presales Solution Consultant (Fintech) | Senior Post-sales Solutions Engineer (Telco)</p>
       <!-- Download Button -->
-       
-      <a href="Resume - Lee Lin Yuan 0325.pdf" download class="download-btn">Download Resume</a>
+      <a href="Resume - Lee Lin Yuan 0325.pdf" download class="download-btn" id="downloadResume">Download Resume</a>
     </div>
     <!-- Main Content: Left & Right Columns -->
     <div class="main-content">
@@ -268,7 +298,6 @@
           </ul>
         </div>
       </div>
-    
       <!-- Right Column -->
       <div class="right-column">
         <!-- Professional Summary -->
@@ -281,7 +310,7 @@
         <!-- Professional Experience -->
         <div class="section professional-experience">
           <h2>Professional Experience</h2>
-          <!-- 1: Senior Presales Solution Consultant -->
+          <!-- Experience Blocks -->
           <div class="experience-block">
             <h3>Senior Presales Solution Consultant</h3>
             <p><strong>Trust Decision</strong> | Jan 2025 – Present</p>
@@ -294,7 +323,6 @@
             </ul>
           </div>
           <hr>
-          <!-- 2: Senior Product &amp; Solution Engineer -->
           <div class="experience-block">
             <h3>Senior Product &amp; Solution Engineer</h3>
             <p><strong>Huawei Technologies</strong> | Dec 2019 – Jan 2025</p>
@@ -307,7 +335,6 @@
             </ul>
           </div>
           <hr>
-          <!-- 3: Corporate Banking Specialist -->
           <div class="experience-block">
             <h3>Corporate Banking Specialist</h3>
             <p><strong>Hong Leong Bank Berhad</strong> | July 2019 – Dec 2019</p>
@@ -316,7 +343,6 @@
             </ul>
           </div>
           <hr>
-          <!-- 4: Tax Operation Specialist -->
           <div class="experience-block">
             <h3>Tax Operation Specialist</h3>
             <p><strong>Royal Bank Canada (M) Sdn Bhd</strong> | Jan 2019 – June 2019</p>
@@ -340,20 +366,63 @@
             <li><strong>Excellent Knowledge Operation Award:</strong> Knowledge sharing &amp; timely execution.</li>
           </ul>
         </div>
-        <!-- Contact Form with Turnstile -->
-        <div class="section contact-form">
-          <h2>Contact Me</h2>
-          <form action="verify.php" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
-            <!-- Cloudflare Turnstile Widget -->
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAABCZBfcM_f4sGgGQ"></div>
-            <button type="submit">Send Message</button>
-          </form>
-        </div>
-      </div>
+        <!-- Contact Form: Only Message Input -->
+<div class="section contact-form">
+  <h2>Contact Me</h2>
+  <form id="contactForm">
+    <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var message = this.message.value;
+    var subject = encodeURIComponent("Contact via Website");
+    var body = encodeURIComponent(message);
+    // This opens the default email client to send the email.
+    window.location.href = "mailto:linger97.ll@gmail.com?subject=" + subject + "&body=" + body;
+  });
+</script>
+
+  
+  <!-- Modal for Turnstile Verification -->
+  <div id="turnstileModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <p>Please complete the verification to download your resume.</p>
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAABCZBfcM_f4sGgGQ" data-callback="onTurnstileSuccess"></div>
     </div>
   </div>
+  
+  <script>
+    // When the download button is clicked, show the turnstile modal
+    document.getElementById('downloadResume').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('turnstileModal').style.display = 'block';
+    });
+    
+    // Close modal if user clicks on the close button
+    document.getElementById('closeModal').addEventListener('click', function() {
+      document.getElementById('turnstileModal').style.display = 'none';
+    });
+    
+    // Callback function called when Cloudflare Turnstile is successfully completed
+    function onTurnstileSuccess(token) {
+      // Optionally, you can validate the token on your server before proceeding
+      document.getElementById('turnstileModal').style.display = 'none';
+      // Trigger the download of the resume
+      window.location.href = "Resume - Lee Lin Yuan 0325.pdf";
+    }
+    
+    // Optionally, close the modal when clicking outside of it
+    window.onclick = function(event) {
+      const modal = document.getElementById('turnstileModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 </body>
 </html>
