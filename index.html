@@ -239,9 +239,10 @@
     <div class="header">
       <h1>Lee Lin Yuan</h1>
       <p>Senior Presales Solution Consultant (Fintech) | Senior IT Business Analyst (Huawei)</p>
-      <!-- Download Button -->
-      <a href="Resume – 0412.pdf"
-         download="Resume – 0412.pdf"
+      <!-- Download Button (href no longer points directly at PDF) -->
+      <a href="javascript:void(0)"
+         data-file="Resume-0412.pdf"
+         download="Resume-0412.pdf"
          class="download-btn"
          id="downloadBtn">
         Download Resume
@@ -330,7 +331,7 @@
           </div>
           <hr>
           <div class="experience-block">
-            <h3>Senior Product &amp; Solution Engineer</h3>
+            <h3>Senior IT Business Analyst</h3>
             <p><strong>Huawei Technologies</strong> | Dec 2019 – Jan 2025</p>
             <ul>
               <li>Led enterprise-level ERP implementation across 22 Asia-Pacific offices, managing a team of over 300 testers and developers while reporting directly to C-level executives.</li>
@@ -392,6 +393,7 @@
       </div>
     </div>
   </div>
+
   <!-- Modal for Turnstile Verification -->
   <div id="turnstileModal" class="modal">
     <div class="modal-content">
@@ -400,32 +402,39 @@
       <div class="cf-turnstile" data-sitekey="0x4AAAAAABCZBfcM_f4sGgGQ" data-callback="onTurnstileSuccess"></div>
     </div>
   </div>
+
   <script>
     // Show modal on button click
     document.getElementById('downloadBtn').addEventListener('click', function(e) {
       e.preventDefault();
       document.getElementById('turnstileModal').style.display = 'block';
     });
+
     // Close modal
     document.getElementById('closeModal').addEventListener('click', function() {
       document.getElementById('turnstileModal').style.display = 'none';
     });
+
     // After successful Turnstile
     function onTurnstileSuccess(token) {
       document.getElementById('turnstileModal').style.display = 'none';
-      // Force download of the PDF
+
+      const downloadBtn = document.getElementById('downloadBtn');
+      const fileName = downloadBtn.getAttribute('data-file');
+
       const link = document.createElement('a');
-      link.href = "Resume – 0412.pdf";
-      link.download = "Resume – 0412.pdf";
+      link.href = fileName;
+      link.download = fileName;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
+
     // Close modal when clicking outside
     window.onclick = function(event) {
       const modal = document.getElementById('turnstileModal');
       if (event.target === modal) {
-        modal.style.display = "none";
+        modal.style.display = 'none';
       }
     };
   </script>
