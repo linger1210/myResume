@@ -238,9 +238,14 @@
     <!-- Header -->
     <div class="header">
       <h1>Lee Lin Yuan</h1>
-      <p>Senior Presales Solution Consultant (Fintech) | Senior Post-sales Solutions Engineer (Telco)</p>
+      <p>Senior Presales Solution Consultant (Fintech) | Senior IT Business Analyst (Huawei)</p>
       <!-- Download Button -->
-      <a href="Resume - Lee Lin Yuan 0325.pdf" download class="download-btn" id="downloadBtn">Download Resume</a>
+      <a href="Resume – 0412.pdf"
+         download="Resume – 0412.pdf"
+         class="download-btn"
+         id="downloadBtn">
+        Download Resume
+      </a>
     </div>
     <!-- Main Content: Left & Right Columns -->
     <div class="main-content">
@@ -305,7 +310,7 @@
         <div class="section professional-summary">
           <h2>Professional Summary</h2>
           <p>
-            Results-driven Senior Solutions Engineer with 5+ years of expertise in solution design, B2B integrations, and technical consulting. Skilled at bridging business and technology to deliver scalable solutions that drive efficiency and growth in fintech and telecom. Strong track record in system optimization, stakeholder management, and digital transformation.
+            Experienced Business Analyst turned Senior Solutions Engineer with 5+ years at Huawei, specializing in solution design, B2B integrations, and technical consulting. Adept at translating business requirements into scalable technical solutions across fintech and telecom industries. Proven track record in driving digital transformation, optimizing systems, and managing cross-functional stakeholders to deliver measurable business outcomes.
           </p>
         </div>
         <!-- Professional Experience -->
@@ -381,7 +386,6 @@
             var message = this.message.value;
             var subject = encodeURIComponent("Contact via Website");
             var body = encodeURIComponent(message);
-            // Open the default email client to send the email.
             window.location.href = "mailto:linger97.ll@gmail.com?subject=" + subject + "&body=" + body;
           });
         </script>
@@ -397,25 +401,30 @@
     </div>
   </div>
   <script>
-    // When the download button is clicked, show the Turnstile modal
+    // Show modal on button click
     document.getElementById('downloadBtn').addEventListener('click', function(e) {
       e.preventDefault();
       document.getElementById('turnstileModal').style.display = 'block';
     });
-    // Close modal if user clicks the close button
+    // Close modal
     document.getElementById('closeModal').addEventListener('click', function() {
       document.getElementById('turnstileModal').style.display = 'none';
     });
-    // Callback function called when Cloudflare Turnstile is successfully completed
+    // After successful Turnstile
     function onTurnstileSuccess(token) {
       document.getElementById('turnstileModal').style.display = 'none';
-      // Open the resume in a new tab
-      window.open("Resume - Lee Lin Yuan 0325.pdf", "_blank");
+      // Force download of the PDF
+      const link = document.createElement('a');
+      link.href = "Resume – 0412.pdf";
+      link.download = "Resume – 0412.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
-    // Optionally, close the modal when clicking outside of it
+    // Close modal when clicking outside
     window.onclick = function(event) {
       const modal = document.getElementById('turnstileModal');
-      if (event.target == modal) {
+      if (event.target === modal) {
         modal.style.display = "none";
       }
     };
